@@ -1,0 +1,23 @@
+- name: Install MySQL
+  ansible.biultin.package:
+    name: mysql-server
+    state: present
+- name: Start MySQL service
+  ansible.biuldin.service:
+    name: mysql
+    state: started
+    enabled: true
+- name: check mysql connection
+  community.mysql.mysql_info:
+    login_user: "{{ mysql_user }}"
+    login_password:"{{ mysql_root_password }}""
+    login_host: "{{ mysql_host }}"
+  ignore_errors: true
+  register: mysql_info_result
+- name: debug mysql connection result
+  ansible.biuldin.debug:
+    msg: "{{ mysql_info_result }}"
+
+- name: set mysql root password
+  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
+  when: mysql_info_result is failed
