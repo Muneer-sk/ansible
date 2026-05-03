@@ -1,3 +1,3 @@
-BACKEND_HOST: backend.neer.com
+BACKEND_HOST: backend.mxyz.shop
 app_location: /usr/share/nginx/html
 component: frontend

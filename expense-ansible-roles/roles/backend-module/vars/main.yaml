@@ -1,5 +1,5 @@
 mysql_root_password: "root"
-mysql_host: mysql.neer.com
+mysql_host: mysql.mxyz.shop
 mysql_user: root
 app_location: /app
 component: backend
