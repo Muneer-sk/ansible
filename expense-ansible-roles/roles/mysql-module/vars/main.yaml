@@ -1,3 +1,2 @@
-mysql_root_password: "root"
-mysql_host: mysql.neer.com
-mysql_user: root
+mysql_root_password: ExpenseApp@1
+login_host: mysql.daws81s.online
