@@ -1,3 +1,7 @@
+# Required variables:
+# - mysql_root_password: The password to set for the MySQL root user.
+# - login_host (optional): The host to use for MySQL login (default: localhost).
+
 - name: ansible to install pymysql
   ansible.builtin.pip:
     name:
@@ -10,7 +14,7 @@
 
 - name: start mysql server
   ansible.builtin.service:
-    name: mysqld
+    name: mysql
     state: started
     enabled: yes
 
@@ -27,5 +31,12 @@
     msg: "{{ mysql_info }}"
 
 - name: setup MySQL root password
-  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
+  community.mysql.mysql_user:
+  when: "'failed' in mysql_info and mysql_info.failed"
+    host_all: true
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password | default('') }}"
+    login_host: "{{ login_host | default('localhost') }}"
+    state: present
   when: mysql_info.failed is true
