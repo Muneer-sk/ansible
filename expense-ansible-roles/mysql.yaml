@@ -1,5 +1,7 @@
 - name: mysql module
   hosts: mysql
+  collections:
+    - community.mysql
   become: true
   roles:
     - mysql-module
